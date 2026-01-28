@@ -21,11 +21,16 @@ This exploratory project aims to:
 ```
 exploratory-future-outcome/
 ├── index.html                      # Main navigation hub
+├── questionnaires.html             # Wrapper page for all questionnaire files
 ├── original-questionnaire.html     # Primary survey form (5 questions)
 ├── ai-questionnaire-preview (1).html  # Extended preview version
 ├── dashboard.html                  # Analytics and visualization dashboard
+├── roadmap.png                     # Strategic roadmap for AI integration
 ├── example-responses.xlsx          # Sample survey responses
 ├── ai-faculty-questionnaire.docx   # Original questionnaire document
+├── opening-script.md               # 60-second opening script for presentations
+├── Initial Feedback.pdf            # Research document
+├── Next Steps.pdf                  # Research document
 └── README.md                       # This file
 ```
 
@@ -38,11 +43,10 @@ exploratory-future-outcome/
    - This provides easy access to all project components
 
 2. **Explore the Components**
-   - **Original Questionnaire**: Main survey form for data collection
-   - **Questionnaire Preview**: Extended version with additional questions
+   - **Questionnaires**: Access all survey forms and example responses
    - **Dashboard**: View analytics and visualizations
-   - **Example Responses**: Review sample data structure
-   - **Research**: Access supporting documents
+   - **Roadmap**: Review strategic plan for AI integration
+   - **Research**: Access supporting documents and PDFs
 
 ### No Installation Required
 
@@ -50,7 +54,22 @@ This is a static HTML project that runs entirely in the browser. No build proces
 
 ## 📊 Components
 
-### 1. Original Questionnaire (`original-questionnaire.html`)
+### 1. Navigation Hub (`index.html`)
+
+The main entry point providing access to all project components:
+- **Questionnaires**: Links to wrapper page with all survey forms
+- **Dashboard Results**: Interactive analytics dashboard
+- **Roadmap**: Strategic planning document
+- **Research & Documents**: Supporting PDFs and materials
+
+### 2. Questionnaires Wrapper (`questionnaires.html`)
+
+A consolidated page providing access to:
+- Original Questionnaire (5 questions)
+- Questionnaire Preview (15 questions)
+- Example Responses (Excel file)
+
+### 3. Original Questionnaire (`original-questionnaire.html`)
 
 The primary survey form containing 5 key questions:
 
@@ -69,7 +88,7 @@ The primary survey form containing 5 key questions:
 - Form validation
 - Modern UI with Tailwind CSS
 
-### 2. Questionnaire Preview (`ai-questionnaire-preview (1).html`)
+### 4. Questionnaire Preview (`ai-questionnaire-preview (1).html`)
 
 Extended preview version with 15 comprehensive questions including:
 - About You section (experience, discipline, teaching years)
@@ -79,7 +98,7 @@ Extended preview version with 15 comprehensive questions including:
 - Ethical considerations
 - Future outlook
 
-### 3. Dashboard (`dashboard.html`)
+### 5. Dashboard (`dashboard.html`)
 
 Interactive analytics dashboard featuring:
 - Response statistics (47 responses, 78% response rate)
@@ -88,18 +107,28 @@ Interactive analytics dashboard featuring:
 - Dark theme with gradient accents
 - Chart.js visualizations
 
-### 4. Example Responses (`example-responses.xlsx`)
+### 6. Roadmap (`roadmap.png`)
+
+Strategic roadmap outlining:
+- Implementation phases
+- Key milestones
+- Resource requirements
+- Timeline for AI curriculum integration
+
+### 7. Example Responses (`example-responses.xlsx`)
 
 Sample survey data in Excel format for:
 - Data analysis reference
 - Understanding response structure
 - Testing dashboard functionality
 
-### 5. Research Materials
+### 8. Research Materials
 
 Supporting documents and resources:
-- Original questionnaire document (DOCX)
-- Additional PDF resources (can be added)
+- **AI Faculty Questionnaire** (DOCX): Original questionnaire document
+- **Initial Feedback.pdf**: Initial feedback and insights
+- **Next Steps.pdf**: Next steps and recommendations
+- **Opening Script** (`opening-script.md`): 60-second presentation script
 
 ## 🛠️ Technologies Used
 

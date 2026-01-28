@@ -5,127 +5,387 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Curriculum Integration — Project Hub</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * { font-family: 'Inter', sans-serif; }
     .card-hover { transition: all 0.3s ease; }
     .card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); }
     .gradient-text { background: linear-gradient(to right, #2563eb, #7c3aed, #ec4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .content-section { display: none; }
+    .content-section.active { display: block; }
+    .breadcrumb { transition: all 0.2s ease; }
+    .breadcrumb:hover { color: #2563eb; }
+    iframe { border: none; width: 100%; }
+    .pdf-viewer { width: 100%; height: 80vh; border: 1px solid #e5e7eb; border-radius: 0.5rem; }
+    .image-viewer { max-width: 100%; height: auto; border-radius: 0.5rem; }
   </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
-  <!-- Header -->
-  <header class="bg-white border-b border-gray-200">
-    <div class="max-w-5xl mx-auto px-6 py-8">
-      <div class="text-center">
-        <h1 class="text-3xl font-bold gradient-text mb-2">AI Curriculum Integration</h1>
-        <p class="text-gray-600">Graduate Business & Leadership Program</p>
+  
+  <!-- Breadcrumb Navigation (hidden on home) -->
+  <nav id="breadcrumbNav" class="bg-white border-b border-gray-200 py-3 px-6 hidden">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-center gap-2 text-sm">
+        <button onclick="showSection('home')" class="breadcrumb text-gray-600 hover:text-blue-600 flex items-center gap-1">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+          </svg>
+          Home
+        </button>
+        <span class="text-gray-400">/</span>
+        <span id="breadcrumbCurrent" class="text-gray-900 font-medium"></span>
       </div>
     </div>
-  </header>
+  </nav>
 
-  <main class="max-w-5xl mx-auto px-6 py-12">
-    <!-- Navigation Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      
-      <!-- Questionnaires -->
-      <a href="questionnaires.html" class="card-hover bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:border-blue-300 group">
-        <div class="flex items-start justify-between mb-4">
-          <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center group-hover:bg-blue-200 transition-colors">
-            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-            </svg>
-          </div>
-          <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded">Primary</span>
+  <!-- HOME SECTION -->
+  <section id="home" class="content-section active">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200">
+      <div class="max-w-5xl mx-auto px-6 py-8">
+        <div class="text-center">
+          <h1 class="text-3xl font-bold gradient-text mb-2">AI Curriculum Integration</h1>
+          <p class="text-gray-600">Graduate Business & Leadership Program</p>
         </div>
-        <h3 class="text-xl font-bold text-gray-900 mb-2">Questionnaires</h3>
-        <p class="text-gray-600 text-sm mb-4">Access the original questionnaire, preview version, and example responses.</p>
-        <div class="flex items-center text-blue-600 text-sm font-medium">
-          <span>View Questionnaires</span>
-          <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </div>
-      </a>
+      </div>
+    </header>
 
-      <!-- Dashboard Results -->
-      <a href="dashboard.html" class="card-hover bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:border-indigo-300 group">
-        <div class="flex items-start justify-between mb-4">
-          <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center group-hover:bg-indigo-200 transition-colors">
-            <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-          </div>
-          <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">Analytics</span>
-        </div>
-        <h3 class="text-xl font-bold text-gray-900 mb-2">Dashboard Results</h3>
-        <p class="text-gray-600 text-sm mb-4">Interactive dashboard with visualizations, charts, and analysis of survey responses.</p>
-        <div class="flex items-center text-indigo-600 text-sm font-medium">
-          <span>View Dashboard</span>
-          <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </div>
-      </a>
-
-      <!-- Research -->
-      <div class="card-hover bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:border-amber-300 group md:col-span-2">
-        <div class="flex items-start justify-between mb-4">
-          <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center group-hover:bg-amber-200 transition-colors">
-            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-            </svg>
-          </div>
-          <span class="text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded">Research</span>
-        </div>
-        <h3 class="text-xl font-bold text-gray-900 mb-2">Research & Documents</h3>
-        <p class="text-gray-600 text-sm mb-4">View research papers, PDF documents, and supporting materials related to AI curriculum integration.</p>
-        <div id="researchSection" class="mt-4">
-          <div class="space-y-3">
-            <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 hover:bg-gray-100 cursor-pointer" onclick="openPDF('ai-faculty-questionnaire.docx')">
-              <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-              </svg>
-              <span class="text-sm text-gray-700 flex-1">AI Faculty Questionnaire (DOCX)</span>
-              <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+    <main class="max-w-5xl mx-auto px-6 py-12">
+      <!-- Navigation Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Questionnaires -->
+        <button onclick="showSection('questionnaires')" class="card-hover bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:border-blue-300 group text-left">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+              <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
               </svg>
             </div>
-            <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 hover:bg-gray-100 cursor-pointer" onclick="openPDF('research-paper-1.pdf')">
-              <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-              </svg>
-              <span class="text-sm text-gray-700 flex-1">Research Paper 1 (PDF)</span>
-              <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded">Primary</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Questionnaires</h3>
+          <p class="text-gray-600 text-sm mb-4">Access the original questionnaire, preview version, and example responses.</p>
+          <div class="flex items-center text-blue-600 text-sm font-medium">
+            <span>View Questionnaires</span>
+            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </div>
+        </button>
+
+        <!-- Dashboard Results -->
+        <button onclick="showSection('dashboard')" class="card-hover bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:border-indigo-300 group text-left">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center group-hover:bg-indigo-200 transition-colors">
+              <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
               </svg>
             </div>
-            <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 hover:bg-gray-100 cursor-pointer" onclick="openPDF('research-paper-2.pdf')">
-              <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+            <span class="text-xs font-semibold text-indigo-600 bg-indigo-50 px-2 py-1 rounded">Analytics</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Dashboard Results</h3>
+          <p class="text-gray-600 text-sm mb-4">Interactive dashboard with visualizations, charts, and analysis of survey responses.</p>
+          <div class="flex items-center text-indigo-600 text-sm font-medium">
+            <span>View Dashboard</span>
+            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </div>
+        </button>
+
+        <!-- Roadmap -->
+        <button onclick="showSection('roadmap')" class="card-hover bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:border-green-300 group text-left">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center group-hover:bg-green-200 transition-colors">
+              <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
               </svg>
-              <span class="text-sm text-gray-700 flex-1">Research Paper 2 (PDF)</span>
-              <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+            </div>
+            <span class="text-xs font-semibold text-green-600 bg-green-50 px-2 py-1 rounded">Planning</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Roadmap</h3>
+          <p class="text-gray-600 text-sm mb-4">Strategic roadmap outlining the path forward for AI curriculum integration.</p>
+          <div class="flex items-center text-green-600 text-sm font-medium">
+            <span>View Roadmap</span>
+            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </div>
+        </button>
+
+        <!-- Research -->
+        <div class="card-hover bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:border-amber-300 group md:col-span-2">
+          <div class="flex items-start justify-between mb-4">
+            <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center group-hover:bg-amber-200 transition-colors">
+              <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
               </svg>
+            </div>
+            <span class="text-xs font-semibold text-amber-600 bg-amber-50 px-2 py-1 rounded">Research</span>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-2">Research & Documents</h3>
+          <p class="text-gray-600 text-sm mb-4">View research papers, PDF documents, and supporting materials related to AI curriculum integration.</p>
+          <div id="researchSection" class="mt-4">
+            <div class="space-y-3">
+              <button onclick="showSection('research', 'ai-faculty-questionnaire.docx')" class="w-full flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 hover:bg-gray-100 cursor-pointer text-left">
+                <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+                <span class="text-sm text-gray-700 flex-1">AI Faculty Questionnaire (DOCX)</span>
+                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </button>
+              <button onclick="showSection('research', 'Initial Feedback.pdf')" class="w-full flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 hover:bg-gray-100 cursor-pointer text-left">
+                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+                <span class="text-sm text-gray-700 flex-1">Initial Feedback (PDF)</span>
+                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </button>
+              <button onclick="showSection('research', 'Next Steps.pdf')" class="w-full flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 hover:bg-gray-100 cursor-pointer text-left">
+                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                </svg>
+                <span class="text-sm text-gray-700 flex-1">Next Steps (PDF)</span>
+                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <footer class="border-t border-gray-200 mt-12 py-6 bg-white">
-    <div class="max-w-5xl mx-auto px-6 text-center text-sm text-gray-500">
-      <p>AI Curriculum Integration Initiative | Graduate Business & Leadership Program</p>
-      <p class="mt-1 text-xs text-gray-400">Project Hub — Last updated January 2026</p>
+    <footer class="border-t border-gray-200 mt-12 py-6 bg-white">
+      <div class="max-w-5xl mx-auto px-6 text-center text-sm text-gray-500">
+        <p>AI Curriculum Integration Initiative | Graduate Business & Leadership Program</p>
+        <p class="mt-1 text-xs text-gray-400">Project Hub — Last updated January 2026</p>
+      </div>
+    </footer>
+  </section>
+
+  <!-- QUESTIONNAIRES SECTION -->
+  <section id="questionnaires" class="content-section">
+    <div class="bg-white min-h-screen">
+      <div class="max-w-4xl mx-auto px-6 py-8">
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">Questionnaires</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <button onclick="showSection('original-questionnaire')" class="card-hover bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:border-blue-300 group text-left">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <span class="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-1 rounded">Primary</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Original Questionnaire</h3>
+            <p class="text-gray-600 text-sm mb-4">The main survey form for adjunct faculty. Includes 5 questions about professional AI use and classroom integration.</p>
+            <div class="flex items-center text-blue-600 text-sm font-medium">
+              <span>View Survey</span>
+              <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </button>
+
+          <button onclick="showSection('questionnaire-preview')" class="card-hover bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:border-purple-300 group text-left">
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center group-hover:bg-purple-200 transition-colors">
+                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+              </div>
+              <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-2 py-1 rounded">Preview</span>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Questionnaire Preview</h3>
+            <p class="text-gray-600 text-sm mb-4">Extended preview version with 15 comprehensive questions and interactive features for review purposes.</p>
+            <div class="flex items-center text-purple-600 text-sm font-medium">
+              <span>View Preview</span>
+              <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </button>
+
+          <a href="example-responses.xlsx" download class="card-hover bg-white rounded-2xl p-6 border border-gray-200 shadow-sm hover:border-emerald-300 group text-left md:col-span-2">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center group-hover:bg-emerald-200 transition-colors flex-shrink-0">
+                <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="text-xl font-bold text-gray-900">Example Responses</h3>
+                  <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-1 rounded">Data</span>
+                </div>
+                <p class="text-gray-600 text-sm mb-4">Sample survey responses in Excel format for analysis and reference.</p>
+                <div class="flex items-center text-emerald-600 text-sm font-medium">
+                  <span>Download Excel</span>
+                  <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
     </div>
-  </footer>
+  </section>
+
+  <!-- ORIGINAL QUESTIONNAIRE SECTION -->
+  <section id="original-questionnaire" class="content-section">
+    <div class="bg-white min-h-screen">
+      <div class="border-b border-gray-200 bg-white px-6 py-4">
+        <div class="max-w-7xl mx-auto">
+          <h1 class="text-xl font-bold text-gray-900">Original Questionnaire</h1>
+        </div>
+      </div>
+      <iframe src="original-questionnaire.html" class="w-full" style="height: calc(100vh - 140px);"></iframe>
+    </div>
+  </section>
+
+  <!-- QUESTIONNAIRE PREVIEW SECTION -->
+  <section id="questionnaire-preview" class="content-section">
+    <div class="bg-white min-h-screen">
+      <div class="border-b border-gray-200 bg-white px-6 py-4">
+        <div class="max-w-7xl mx-auto">
+          <h1 class="text-xl font-bold text-gray-900">Questionnaire Preview</h1>
+        </div>
+      </div>
+      <iframe src="ai-questionnaire-preview%20(1).html" class="w-full" style="height: calc(100vh - 140px);"></iframe>
+    </div>
+  </section>
+
+  <!-- DASHBOARD SECTION -->
+  <section id="dashboard" class="content-section">
+    <div class="bg-slate-950 min-h-screen">
+      <div class="border-b border-slate-800 bg-slate-900 px-6 py-4">
+        <div class="max-w-7xl mx-auto">
+          <h1 class="text-xl font-bold text-white">Dashboard Results</h1>
+        </div>
+      </div>
+      <iframe src="dashboard.html" class="w-full" style="height: calc(100vh - 140px);"></iframe>
+    </div>
+  </section>
+
+  <!-- ROADMAP SECTION -->
+  <section id="roadmap" class="content-section">
+    <div class="bg-white min-h-screen py-8">
+      <div class="max-w-7xl mx-auto px-6">
+        <h1 class="text-2xl font-bold text-gray-900 mb-6">Strategic Roadmap</h1>
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <img src="roadmap.png" alt="AI Curriculum Integration Roadmap" class="image-viewer w-full">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH SECTION -->
+  <section id="research" class="content-section">
+    <div class="bg-white min-h-screen py-8">
+      <div class="max-w-7xl mx-auto px-6">
+        <h1 class="text-2xl font-bold text-gray-900 mb-6" id="researchTitle">Research & Documents</h1>
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+          <iframe id="researchViewer" src="" class="pdf-viewer"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <script>
-    function openPDF(filename) {
-      window.open(filename, '_blank');
+    // Section names for breadcrumbs
+    const sectionNames = {
+      'home': 'Home',
+      'questionnaires': 'Questionnaires',
+      'original-questionnaire': 'Original Questionnaire',
+      'questionnaire-preview': 'Questionnaire Preview',
+      'dashboard': 'Dashboard Results',
+      'roadmap': 'Roadmap',
+      'research': 'Research & Documents'
+    };
+
+    function showSection(sectionId, file = null) {
+      // Hide all sections
+      document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+      });
+
+      // Show selected section
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.classList.add('active');
+        
+        // Show/hide breadcrumb
+        const breadcrumbNav = document.getElementById('breadcrumbNav');
+        const breadcrumbCurrent = document.getElementById('breadcrumbCurrent');
+        
+        if (sectionId === 'home') {
+          breadcrumbNav.classList.add('hidden');
+        } else {
+          breadcrumbNav.classList.remove('hidden');
+          breadcrumbCurrent.textContent = sectionNames[sectionId] || sectionId;
+        }
+
+        // Handle research section with file parameter
+        if (sectionId === 'research' && file) {
+          const viewer = document.getElementById('researchViewer');
+          const title = document.getElementById('researchTitle');
+          if (viewer) {
+            viewer.src = file;
+          }
+          if (title && file) {
+            const fileName = file.split('/').pop().replace('.pdf', '').replace('.docx', '');
+            title.textContent = fileName;
+          }
+        }
+
+        // Scroll to top
+        window.scrollTo(0, 0);
+      }
     }
+
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', function(event) {
+      if (event.state && event.state.section) {
+        showSection(event.state.section);
+      } else {
+        showSection('home');
+      }
+    });
+
+    // Update URL without reloading (for bookmarking)
+    function updateURL(sectionId) {
+      const url = sectionId === 'home' ? window.location.pathname : `${window.location.pathname}#${sectionId}`;
+      window.history.pushState({ section: sectionId }, '', url);
+    }
+
+    // Check URL hash on load
+    window.addEventListener('load', function() {
+      const hash = window.location.hash.substring(1);
+      if (hash && document.getElementById(hash)) {
+        showSection(hash);
+        updateURL(hash);
+      } else {
+        showSection('home');
+      }
+    });
+
+    // Override showSection to also update URL
+    const originalShowSection = showSection;
+    showSection = function(sectionId, file = null) {
+      originalShowSection(sectionId, file);
+      updateURL(sectionId);
+    };
   </script>
 </body>
 </html>
