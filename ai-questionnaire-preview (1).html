@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adjunct Faculty Survey: AI in Professional Practice & The Classroom</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    .progress-bar { transition: width 0.3s ease; }
+    input[type="radio"], input[type="checkbox"] { accent-color: #2563eb; transform: scale(1.2); }
+    .question-card { transition: all 0.2s ease; }
+    .question-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    textarea:focus, input:focus { outline: none; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2); }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <div class="max-w-3xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <h1 class="text-xl font-bold text-gray-900">Adjunct Faculty Survey</h1>
+          <p class="text-sm text-gray-500">AI in Professional Practice & The Classroom</p>
+        </div>
+        <div class="text-right">
+          <p class="text-xs text-gray-400 uppercase tracking-wider">Progress</p>
+          <p class="text-lg font-semibold text-blue-600" id="progressText">0%</p>
+        </div>
+      </div>
+      <div class="mt-3 h-2 bg-gray-200 rounded-full overflow-hidden">
+        <div id="progressBar" class="progress-bar h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" style="width: 0%"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 py-8">
+    <!-- Introduction -->
+    <div class="bg-blue-50 border border-blue-200 rounded-2xl p-6 mb-8">
+      <h2 class="text-lg font-semibold text-blue-900 mb-3">Introduction</h2>
+      <p class="text-gray-700 mb-3">As we continue to align the Graduate Business & Leadership program with the rapid evolution of industry standards, we are exploring the role of Artificial Intelligence in our curriculum. As active practitioners, your insights into how AI is reshaping your specific fields are invaluable.</p>
+      <p class="text-gray-700">This survey aims to understand your current professional use of AI and how we can support you in bringing those insights into the classroom.</p>
+    </div>
+
+    <form id="surveyForm" class="space-y-6">
+      <!-- SECTION A: ABOUT YOU -->
+      <div class="mb-8">
+        <h2 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+          <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">A</span>
+          About You
+        </h2>
+        <p class="text-gray-500 text-sm mb-4">These questions help us tailor training and resources to different experience levels.</p>
+      </div>
+
+      <!-- Q1: Experience Level -->
+      <div class="question-card bg-white rounded-xl p-6 border border-gray-200">
+        <label class="block text-gray-900 font-medium mb-4">
+          <span class="text-blue-600 font-bold">1.</span> How would you rate your overall experience with AI tools?
+        </label>
+        <div class="space-y-3">
+          <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="experience" value="beginner" class="mt-1" onchange="updateProgress()">
+            <div>
+              <span class="font-medium text-gray-900">Beginner</span>
+              <p class="text-sm text-gray-500">Just starting out or minimal exposure</p>
+            </div>
+          </label>
+          <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="experience" value="intermediate" class="mt-1" onchange="updateProgress()">
+            <div>
+              <span class="font-medium text-gray-900">Intermediate</span>
+              <p class="text-sm text-gray-500">Use AI occasionally for basic tasks</p>
+            </div>
+          </label>
+          <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="experience" value="advanced" class="mt-1" onchange="updateProgress()">
+            <div>
+              <span class="font-medium text-gray-900">Advanced</span>
+              <p class="text-sm text-gray-500">Use AI daily or for complex applications</p>
+            </div>
+          </label>
+        </div>
+        <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-sm text-amber-800">
+          💡 <strong>Note:</strong> Your answer here will help us provide appropriately tailored questions and resources.
+        </div>
+      </div>
+
+      <!-- Q2: Discipline -->
+      <div class="question-card bg-white rounded-xl p-6 border border-gray-200">
+        <label class="block text-gray-900 font-medium mb-4">
+          <span class="text-blue-600 font-bold">2.</span> What is your primary discipline?
+        </label>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="radio" name="discipline" value="finance" onchange="updateProgress()">
+            <span class="text-gray-700">Finance / Accounting</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="radio" name="discipline" value="marketing" onchange="updateProgress()">
+            <span class="text-gray-700">Marketing</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="radio" name="discipline" value="leadership" onchange="updateProgress()">
+            <span class="text-gray-700">Leadership / Management</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="radio" name="discipline" value="operations" onchange="updateProgress()">
+            <span class="text-gray-700">Operations / Supply Chain</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="radio" name="discipline" value="analytics" onchange="updateProgress()">
+            <span class="text-gray-700">Analytics / Data Science</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="radio" name="discipline" value="other" onchange="updateProgress()">
+            <span class="text-gray-700">Other</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Q3: Teaching Years -->
+      <div class="question-card bg-white rounded-xl p-6 border border-gray-200">
+        <label class="block text-gray-900 font-medium mb-4">
+          <span class="text-blue-600 font-bold">3.</span> How many years have you been teaching at the graduate level?
+        </label>
+        <div class="space-y-2">
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="years" value="<2" onchange="updateProgress()">
+            <span class="text-gray-700">Less than 2 years</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="years" value="2-5" onchange="updateProgress()">
+            <span class="text-gray-700">2-5 years</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="years" value="6-10" onchange="updateProgress()">
+            <span class="text-gray-700">6-10 years</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="years" value=">10" onchange="updateProgress()">
+            <span class="text-gray-700">More than 10 years</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- SECTION B: PRACTITIONER -->
+      <div class="mb-8 mt-12">
+        <h2 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+          <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">B</span>
+          The Practitioner's Perspective
+        </h2>
+        <p class="text-gray-500 text-sm mb-4">Understanding how you use AI in your non-academic professional work.</p>
+      </div>
+
+      <!-- Q4: AI Tools -->
+      <div class="question-card bg-white rounded-xl p-6 border border-gray-200">
+        <label class="block text-gray-900 font-medium mb-4">
+          <span class="text-blue-600 font-bold">4.</span> Which AI tools are you currently using in your professional role? <span class="text-gray-500 font-normal text-sm">(Select all that apply)</span>
+        </label>
+        <div class="space-y-3">
+          <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="tools" value="gentext" class="mt-1" onchange="updateProgress()">
+            <div>
+              <span class="font-medium text-gray-900">Generative Text</span>
+              <p class="text-sm text-gray-500">ChatGPT, Claude, Gemini, Jasper</p>
+            </div>
+          </label>
+          <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="tools" value="data" class="mt-1" onchange="updateProgress()">
+            <div>
+              <span class="font-medium text-gray-900">Data Analysis & Research</span>
+              <p class="text-sm text-gray-500">Julius AI, Tableau AI, Microsoft Copilot for Excel</p>
+            </div>
+          </label>
+          <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="tools" value="visual" class="mt-1" onchange="updateProgress()">
+            <div>
+              <span class="font-medium text-gray-900">Visual & Media</span>
+              <p class="text-sm text-gray-500">Midjourney, DALL-E, Canva Magic Studio</p>
+            </div>
+          </label>
+          <label class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="tools" value="industry" class="mt-1" onchange="updateProgress()">
+            <div>
+              <span class="font-medium text-gray-900">Industry-Specific</span>
+              <p class="text-sm text-gray-500">Harvey for Law, Salesforce Einstein, GitHub Copilot</p>
+            </div>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="tools" value="none" class="mt-0" onchange="updateProgress()">
+            <span class="text-gray-700">None — I do not currently use AI tools professionally</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Q5: Professional Impact -->
+      <div class="question-card bg-white rounded-xl p-6 border border-gray-200">
+        <label class="block text-gray-900 font-medium mb-2">
+          <span class="text-blue-600 font-bold">5.</span> Describe a specific task or workflow where AI has impacted your professional work.
+        </label>
+        <p class="text-gray-500 text-sm mb-4">Consider both positive impacts (efficiency, insights) AND challenges (biases, verification). If you don't use AI, describe opportunities or concerns you see.</p>
+        <textarea name="impact" rows="4" class="w-full border border-gray-300 rounded-lg p-4 text-gray-700 resize-none" placeholder="Share your experience..." onchange="updateProgress()"></textarea>
+      </div>
+
+      <!-- SECTION C: INSTRUCTOR -->
+      <div class="mb-8 mt-12">
+        <h2 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+          <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">C</span>
+          The Instructor's Perspective
+        </h2>
+        <p class="text-gray-500 text-sm mb-4">Understanding how you currently integrate AI into your teaching.</p>
+      </div>
+
+      <!-- Q6: Classroom Integration -->
+      <div class="question-card bg-white rounded-xl p-6 border border-gray-200">
+        <label class="block text-gray-900 font-medium mb-4">
+          <span class="text-blue-600 font-bold">6.</span> How are you currently incorporating AI into your courses? <span class="text-gray-500 font-normal text-sm">(Select all that apply)</span>
+        </label>
+        <div class="space-y-3">
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="classroom" value="policy" onchange="updateProgress()">
+            <span class="text-gray-700">Policy Only — Updated syllabus with AI usage guidelines</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="classroom" value="permissive" onchange="updateProgress()">
+            <span class="text-gray-700">Permissive — Allow students to use AI for brainstorming/editing</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="classroom" value="integrated" onchange="updateProgress()">
+            <span class="text-gray-700">Integrated — Designed specific assignments requiring AI tools</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="classroom" value="demo" onchange="updateProgress()">
+            <span class="text-gray-700">Demonstrative — Use AI live in class to demonstrate concepts</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="classroom" value="none" onchange="updateProgress()">
+            <span class="text-gray-700">None — Not currently incorporating AI</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Q7: Discipline Ideas -->
+      <div class="question-card bg-white rounded-xl p-6 border border-gray-200">
+        <label class="block text-gray-900 font-medium mb-2">
+          <span class="text-blue-600 font-bold">7.</span> In your discipline, how could AI better prepare students for the job market?
+        </label>
+        <p class="text-gray-500 text-sm mb-4">Consider: skill-building exercises, real-world simulations, ethical discussions, or tool proficiency. Provide 1-2 specific ideas.</p>
+        <textarea name="ideas" rows="4" class="w-full border border-gray-300 rounded-lg p-4 text-gray-700 resize-none" placeholder="Share your ideas..." onchange="updateProgress()"></textarea>
+      </div>
+
+      <!-- Q8: Confidence -->
+      <div class="question-card bg-white rounded-xl p-6 border border-gray-200">
+        <label class="block text-gray-900 font-medium mb-4">
+          <span class="text-blue-600 font-bold">8.</span> How confident do you feel in your ability to teach AI-assisted assignments?
+        </label>
+        <div class="flex justify-between items-center gap-2">
+          <span class="text-xs text-gray-500">Not confident</span>
+          <div class="flex gap-3">
+            <label class="flex flex-col items-center cursor-pointer">
+              <input type="radio" name="confidence" value="1" class="mb-1" onchange="updateProgress()">
+              <span class="text-sm text-gray-600">1</span>
+            </label>
+            <label class="flex flex-col items-center cursor-pointer">
+              <input type="radio" name="confidence" value="2" class="mb-1" onchange="updateProgress()">
+              <span class="text-sm text-gray-600">2</span>
+            </label>
+            <label class="flex flex-col items-center cursor-pointer">
+              <input type="radio" name="confidence" value="3" class="mb-1" onchange="updateProgress()">
+              <span class="text-sm text-gray-600">3</span>
+            </label>
+            <label class="flex flex-col items-center cursor-pointer">
+              <input type="radio" name="confidence" value="4" class="mb-1" onchange="updateProgress()">
+              <span class="text-sm text-gray-600">4</span>
+            </label>
+            <label class="flex flex-col items-center cursor-pointer">
+              <input type="radio" name="confidence" value="5" class="mb-1" onchange="updateProgress()">
+              <span class="text-sm text-gray-600">5</span>
+            </label>
+          </div>
+          <span class="text-xs text-gray-500">Very confident</span>
+        </div>
+      </div>
+
+      <!-- SECTION D: BARRIERS -->
+      <div class="mb-8 mt-12">
+        <h2 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+          <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">D</span>
+          Barriers & Support Needs
+        </h2>
+        <p class="text-gray-500 text-sm mb-4">Help us understand what's preventing deeper AI integration and what support would help.</p>
+      </div>
+
+      <!-- Q9: Barriers Ranking -->
+      <div class="question-card bg-white rounded-xl p-6 border border-gray-200">
+        <label class="block text-gray-900 font-medium mb-4">
+          <span class="text-blue-600 font-bold">9.</span> Rank the following barriers <span class="text-gray-500 font-normal text-sm">(1 = most significant)</span>
+        </label>
+        <div class="space-y-2" id="barriersList">
+          <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-move" draggable="true">
+            <span class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold barrier-rank">1</span>
+            <span class="text-gray-700 flex-1">Lack of access to paid tools for students</span>
+            <span class="text-gray-400">⋮⋮</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-move" draggable="true">
+            <span class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold barrier-rank">2</span>
+            <span class="text-gray-700 flex-1">Uncertainty about academic integrity policies</span>
+            <span class="text-gray-400">⋮⋮</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-move" draggable="true">
+            <span class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold barrier-rank">3</span>
+            <span class="text-gray-700 flex-1">Need for training or examples of AI assignments</span>
+            <span class="text-gray-400">⋮⋮</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-move" draggable="true">
+            <span class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold barrier-rank">4</span>
+            <span class="text-gray-700 flex-1">Time constraints in curriculum redesign</span>
+            <span class="text-gray-400">⋮⋮</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-move" draggable="true">
+            <span class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold barrier-rank">5</span>
+            <span class="text-gray-700 flex-1">Concerns about AI accuracy, biases, or ethics</span>
+            <span class="text-gray-400">⋮⋮</span>
+          </div>
+          <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-200 cursor-move" draggable="true">
+            <span class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-xs font-bold barrier-rank">6</span>
+            <span class="text-gray-700 flex-1">Lack of institutional support or guidelines</span>
+            <span class="text-gray-400">⋮⋮</span>
+          </div>
+        </div>
+        <p class="text-xs text-gray-400 mt-2">Drag to reorder</p>
+      </div>
+
+      <!-- Q10: Support -->
+      <div class="question-card bg-white rounded-xl p-6 border border-gray-200">
+        <label class="block text-gray-900 font-medium mb-4">
+          <span class="text-blue-600 font-bold">10.</span> What support would help you overcome these barriers? <span class="text-gray-500 font-normal text-sm">(Select top 3)</span>
+        </label>
+        <div class="space-y-2">
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="support" value="workshops" onchange="limitCheckboxes(this, 3); updateProgress()">
+            <span class="text-gray-700">Hands-on workshops with example assignments</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="support" value="templates" onchange="limitCheckboxes(this, 3); updateProgress()">
+            <span class="text-gray-700">Sample AI assignment templates by discipline</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="support" value="tools" onchange="limitCheckboxes(this, 3); updateProgress()">
+            <span class="text-gray-700">Subsidized access to AI tools (ChatGPT Plus, etc.)</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="support" value="ethics" onchange="limitCheckboxes(this, 3); updateProgress()">
+            <span class="text-gray-700">Clear institutional AI ethics guidelines</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="support" value="mentoring" onchange="limitCheckboxes(this, 3); updateProgress()">
+            <span class="text-gray-700">Peer mentoring from colleagues using AI</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-200">
+            <input type="checkbox" name="support" value="time" onchange="limitCheckboxes(this, 3); updateProgress()">
+            <span class="text-gray-700">Dedicated curriculum redesign time</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- SECTION E: ETHICS -->
+      <div class="mb-8 mt-12">
+        <h2 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+          <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">E</span>
+          Ethical & Future Considerations
+        </h2>
+      </div>
+
+      <!-- Q11: Ethics -->
+      <div class="question-card bg-white rounded-xl p-6 border border-gray-200">
+        <label class="block text-gray-900 font-medium mb-2">
+          <span class="text-blue-600 font-bold">11.</span> What ethical considerations should be emphasized when teaching AI in your discipline?
+        </label>
+        <p class="text-gray-500 text-sm mb-4">Consider: bias, privacy, job displacement, misinformation, intellectual property, etc.</p>
+        <textarea name="ethics" rows="3" class="w-full border border-gray-300 rounded-lg p-4 text-gray-700 resize-none" placeholder="Share your thoughts..." onchange="updateProgress()"></textarea>
+      </div>
+
+      <!-- Q12: NPS -->
+      <div class="question-card bg-white rounded-xl p-6 border border-gray-200">
+        <label class="block text-gray-900 font-medium mb-4">
+          <span class="text-blue-600 font-bold">12.</span> How likely are you to recommend AI integration to a colleague teaching a similar course?
+        </label>
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-xs text-gray-500">Not likely</span>
+          <div class="flex gap-1">
+            <label class="flex flex-col items-center cursor-pointer px-2 py-1 rounded hover:bg-gray-100">
+              <input type="radio" name="nps" value="0" class="mb-1" onchange="updateProgress()">
+              <span class="text-xs text-gray-600">0</span>
+            </label>
+            <label class="flex flex-col items-center cursor-pointer px-2 py-1 rounded hover:bg-gray-100">
+              <input type="radio" name="nps" value="1" class="mb-1" onchange="updateProgress()">
+              <span class="text-xs text-gray-600">1</span>
+            </label>
+            <label class="flex flex-col items-center cursor-pointer px-2 py-1 rounded hover:bg-gray-100">
+              <input type="radio" name="nps" value="2" class="mb-1" onchange="updateProgress()">
+              <span class="text-xs text-gray-600">2</span>
+            </label>
+            <label class="flex flex-col items-center cursor-pointer px-2 py-1 rounded hover:bg-gray-100">
+              <input type="radio" name="nps" value="3" class="mb-1" onchange="updateProgress()">
+              <span class="text-xs text-gray-600">3</span>
+            </label>
+            <label class="flex flex-col items-center cursor-pointer px-2 py-1 rounded hover:bg-gray-100">
+              <input type="radio" name="nps" value="4" class="mb-1" onchange="updateProgress()">
+              <span class="text-xs text-gray-600">4</span>
+            </label>
+            <label class="flex flex-col items-center cursor-pointer px-2 py-1 rounded hover:bg-gray-100">
+              <input type="radio" name="nps" value="5" class="mb-1" onchange="updateProgress()">
+              <span class="text-xs text-gray-600">5</span>
+            </label>
+            <label class="flex flex-col items-center cursor-pointer px-2 py-1 rounded hover:bg-gray-100">
+              <input type="radio" name="nps" value="6" class="mb-1" onchange="updateProgress()">
+              <span class="text-xs text-gray-600">6</span>
+            </label>
+            <label class="flex flex-col items-center cursor-pointer px-2 py-1 rounded hover:bg-gray-100">
+              <input type="radio" name="nps" value="7" class="mb-1" onchange="updateProgress()">
+              <span class="text-xs text-gray-600">7</span>
+            </label>
+            <label class="flex flex-col items-center cursor-pointer px-2 py-1 rounded hover:bg-gray-100">
+              <input type="radio" name="nps" value="8" class="mb-1" onchange="updateProgress()">
+              <span class="text-xs text-gray-600">8</span>
+            </label>
+            <label class="flex flex-col items-center cursor-pointer px-2 py-1 rounded hover:bg-gray-100">
+              <input type="radio" name="nps" value="9" class="mb-1" onchange="updateProgress()">
+              <span class="text-xs text-gray-600">9</span>
+            </label>
+            <label class="flex flex-col items-center cursor-pointer px-2 py-1 rounded hover:bg-gray-100">
+              <input type="radio" name="nps" value="10" class="mb-1" onchange="updateProgress()">
+              <span class="text-xs text-gray-600">10</span>
+            </label>
+          </div>
+          <span class="text-xs text-gray-500">Very likely</span>
+        </div>
+        <textarea name="nps_reason" rows="2" class="w-full border border-gray-300 rounded-lg p-3 text-gray-700 resize-none text-sm" placeholder="Why did you choose this rating?" onchange="updateProgress()"></textarea>
+      </div>
+
+      <!-- Q13: Student Demand -->
+      <div class="question-card bg-white rounded-xl p-6 border border-gray-200">
+        <label class="block text-gray-900 font-medium mb-4">
+          <span class="text-blue-600 font-bold">13.</span> Have students asked you about AI skills or tools in your courses?
+        </label>
+        <div class="space-y-2">
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="student_demand" value="frequently" onchange="updateProgress()">
+            <span class="text-gray-700">Yes, frequently</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="student_demand" value="occasionally" onchange="updateProgress()">
+            <span class="text-gray-700">Yes, occasionally</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="student_demand" value="rarely" onchange="updateProgress()">
+            <span class="text-gray-700">Rarely</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="student_demand" value="never" onchange="updateProgress()">
+            <span class="text-gray-700">Never</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Q14: Contribute -->
+      <div class="question-card bg-white rounded-xl p-6 border border-gray-200">
+        <label class="block text-gray-900 font-medium mb-4">
+          <span class="text-blue-600 font-bold">14.</span> Would you be interested in contributing to AI curriculum development?
+        </label>
+        <div class="space-y-2">
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="contribute" value="lead" onchange="updateProgress()">
+            <span class="text-gray-700">Yes — I'd like to lead workshops or create resources</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="contribute" value="templates" onchange="updateProgress()">
+            <span class="text-gray-700">Yes — I'd contribute assignment templates</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="contribute" value="maybe" onchange="updateProgress()">
+            <span class="text-gray-700">Maybe — I'd like to learn more first</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="contribute" value="no" onchange="updateProgress()">
+            <span class="text-gray-700">No — Not at this time</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Q15: Additional -->
+      <div class="question-card bg-white rounded-xl p-6 border border-gray-200">
+        <label class="block text-gray-900 font-medium mb-2">
+          <span class="text-blue-600 font-bold">15.</span> Any additional thoughts on AI integration in our program?
+        </label>
+        <p class="text-gray-500 text-sm mb-4">Include trends you foresee, resources you'd recommend, or concerns we should address.</p>
+        <textarea name="additional" rows="4" class="w-full border border-gray-300 rounded-lg p-4 text-gray-700 resize-none" placeholder="Share any additional thoughts..." onchange="updateProgress()"></textarea>
+      </div>
+
+      <!-- Submit -->
+      <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 text-center">
+        <button type="button" onclick="submitForm()" class="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-8 py-3 rounded-xl shadow-lg transition-all transform hover:scale-105">
+          Submit Survey
+        </button>
+        <p class="text-emerald-700 text-sm mt-3">Thank you for your valuable insights!</p>
+      </div>
+    </form>
+  </main>
+
+  <footer class="border-t border-gray-200 mt-12 py-6 bg-white">
+    <div class="max-w-3xl mx-auto px-6 text-center text-sm text-gray-500">
+      <p>AI Curriculum Integration Initiative | Graduate Business & Leadership Program</p>
+      <p class="mt-1 text-xs text-gray-400">Interactive Preview — This is a mockup for review purposes</p>
+    </div>
+  </footer>
+
+  <script>
+    const totalQuestions = 15;
+    
+    function updateProgress() {
+      let answered = 0;
+      const form = document.getElementById('surveyForm');
+      
+      // Count answered radio groups
+      const radioGroups = ['experience', 'discipline', 'years', 'confidence', 'nps', 'student_demand', 'contribute'];
+      radioGroups.forEach(name => {
+        if (form.querySelector(`input[name="${name}"]:checked`)) answered++;
+      });
+      
+      // Count checkbox groups with at least one selection
+      const checkboxGroups = ['tools', 'classroom', 'support'];
+      checkboxGroups.forEach(name => {
+        if (form.querySelector(`input[name="${name}"]:checked`)) answered++;
+      });
+      
+      // Count textareas with content
+      const textareas = form.querySelectorAll('textarea');
+      textareas.forEach(ta => {
+        if (ta.value.trim().length > 10) answered++;
+      });
+      
+      const percent = Math.round((answered / totalQuestions) * 100);
+      document.getElementById('progressBar').style.width = percent + '%';
+      document.getElementById('progressText').textContent = percent + '%';
+    }
+
+    function limitCheckboxes(checkbox, max) {
+      const checkboxes = document.querySelectorAll(`input[name="${checkbox.name}"]`);
+      const checked = Array.from(checkboxes).filter(cb => cb.checked);
+      if (checked.length > max) {
+        checkbox.checked = false;
+        alert(`Please select a maximum of ${max} options.`);
+      }
+    }
+
+    function submitForm() {
+      const confirmed = confirm('This is a preview mockup. In the live version, your responses would be submitted securely. Click OK to see a success message.');
+      if (confirmed) {
+        alert('✅ Thank you! Your survey has been submitted successfully.\n\nWe will share aggregated results and next steps within the coming weeks.');
+      }
+    }
+
+    // Simple drag and drop for barriers
+    const barriersList = document.getElementById('barriersList');
+    let draggedItem = null;
+
+    barriersList.addEventListener('dragstart', (e) => {
+      draggedItem = e.target.closest('[draggable]');
+      e.target.style.opacity = '0.5';
+    });
+
+    barriersList.addEventListener('dragend', (e) => {
+      e.target.style.opacity = '1';
+      updateBarrierRanks();
+    });
+
+    barriersList.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      const afterElement = getDragAfterElement(barriersList, e.clientY);
+      if (afterElement == null) {
+        barriersList.appendChild(draggedItem);
+      } else {
+        barriersList.insertBefore(draggedItem, afterElement);
+      }
+    });
+
+    function getDragAfterElement(container, y) {
+      const draggableElements = [...container.querySelectorAll('[draggable]:not(.dragging)')];
+      return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
+        } else {
+          return closest;
+        }
+      }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    function updateBarrierRanks() {
+      const ranks = document.querySelectorAll('.barrier-rank');
+      ranks.forEach((rank, index) => {
+        rank.textContent = index + 1;
+      });
+    }
+  </script>
+</body>
+</html>
