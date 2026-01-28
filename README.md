@@ -6,7 +6,7 @@ A comprehensive survey and analytics platform exploring the role of Artificial I
 
 As we continue to align the Graduate Business & Leadership program with the rapid evolution of industry standards, this project explores how AI is reshaping professional fields and how we can support faculty in bringing those insights into the classroom.
 
-The project includes interactive survey forms, data visualization dashboards, and research materials to understand current AI adoption and identify opportunities for curriculum enhancement.
+The project includes interactive survey forms, data visualization dashboards, video overview, and research materials to understand current AI adoption and identify opportunities for curriculum enhancement.
 
 ## 🎯 Purpose
 
@@ -20,18 +20,19 @@ This exploratory project aims to:
 
 ```
 exploratory-future-outcome/
-├── index.html                      # Main navigation hub
-├── questionnaires.html             # Wrapper page for all questionnaire files
-├── original-questionnaire.html     # Primary survey form (5 questions)
-├── ai-questionnaire-preview (1).html  # Extended preview version
-├── dashboard.html                  # Analytics and visualization dashboard
-├── roadmap.png                     # Strategic roadmap for AI integration
-├── example-responses.xlsx          # Sample survey responses
-├── ai-faculty-questionnaire.docx   # Original questionnaire document
-├── opening-script.md               # 60-second opening script for presentations
-├── Initial Feedback.pdf            # Research document
-├── Next Steps.pdf                  # Research document
-└── README.md                       # This file
+├── index.html                              # Main navigation hub (single-page app)
+├── questionnaires.html                     # Wrapper page for all questionnaire files
+├── original-questionnaire.html             # Primary survey form (5 questions)
+├── ai-questionnaire-preview.html          # Extended preview version (15 questions)
+├── dashboard.html                          # Analytics and visualization dashboard
+├── roadmap.png                             # Strategic roadmap for AI integration
+├── AI Curriculum Integration_compressed.mp4 # Video overview (14MB, compressed)
+├── example-responses.xlsx                  # Sample survey responses
+├── ai-faculty-questionnaire.docx           # Original questionnaire document
+├── opening-script.md                       # 60-second opening script for presentations
+├── Initial Feedback.pdf                    # Research document
+├── Next Steps.pdf                          # Research document
+└── README.md                               # This file
 ```
 
 ## 🚀 Getting Started
@@ -44,6 +45,7 @@ exploratory-future-outcome/
 
 2. **Explore the Components**
    - **Questionnaires**: Access all survey forms and example responses
+   - **Video**: Watch the AI Curriculum Integration overview video (embedded in middle column)
    - **Dashboard**: View analytics and visualizations
    - **Roadmap**: Review strategic plan for AI integration
    - **Research**: Access supporting documents and PDFs
@@ -56,11 +58,21 @@ This is a static HTML project that runs entirely in the browser. No build proces
 
 ### 1. Navigation Hub (`index.html`)
 
-The main entry point providing access to all project components:
+The main entry point providing access to all project components. Features a **single-page application** design with embedded content sections and breadcrumb navigation:
+
+**Layout:**
+- **Left Column**: Two cards stacked (Questionnaires, Dashboard)
+- **Middle Column**: Video player (AI Curriculum Integration overview)
+- **Right Column**: Two cards stacked (Roadmap, Research & Documents)
+
+**Features:**
 - **Questionnaires**: Links to wrapper page with all survey forms
 - **Dashboard Results**: Interactive analytics dashboard
+- **Video**: Embedded video overview (14MB compressed)
 - **Roadmap**: Strategic planning document
 - **Research & Documents**: Supporting PDFs and materials
+- Breadcrumb navigation on all sections
+- URL hash routing for bookmarking
 
 ### 2. Questionnaires Wrapper (`questionnaires.html`)
 
@@ -88,7 +100,7 @@ The primary survey form containing 5 key questions:
 - Form validation
 - Modern UI with Tailwind CSS
 
-### 4. Questionnaire Preview (`ai-questionnaire-preview (1).html`)
+### 4. Questionnaire Preview (`ai-questionnaire-preview.html`)
 
 Extended preview version with 15 comprehensive questions including:
 - About You section (experience, discipline, teaching years)
@@ -107,7 +119,15 @@ Interactive analytics dashboard featuring:
 - Dark theme with gradient accents
 - Chart.js visualizations
 
-### 6. Roadmap (`roadmap.png`)
+### 6. Video Overview (`AI Curriculum Integration_compressed.mp4`)
+
+Compressed video (14MB) providing:
+- Project overview and introduction
+- Key findings and insights
+- Visual presentation of survey results
+- Duration: ~2.5 minutes
+
+### 7. Roadmap (`roadmap.png`)
 
 Strategic roadmap outlining:
 - Implementation phases
@@ -115,14 +135,14 @@ Strategic roadmap outlining:
 - Resource requirements
 - Timeline for AI curriculum integration
 
-### 7. Example Responses (`example-responses.xlsx`)
+### 8. Example Responses (`example-responses.xlsx`)
 
 Sample survey data in Excel format for:
 - Data analysis reference
 - Understanding response structure
 - Testing dashboard functionality
 
-### 8. Research Materials
+### 9. Research Materials
 
 Supporting documents and resources:
 - **AI Faculty Questionnaire** (DOCX): Original questionnaire document
